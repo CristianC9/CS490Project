@@ -1,36 +1,30 @@
 <!DOCTYPE HTML>
-
 <html>
 
-<head>    
-
+<head>
+    <title>
+        Login Page
+    </title>
 </head>
 
 <body>
-  <script>
-    function checkAnswer(){ //function will be used to determine where to redirect
-      location = "http://localhost/test.php" //location is a dummy variable
-      return false;
-    }
-  </script>
-  <h1>Login Page</h1>
-  <form onSubmit="return checkAnswer();" method="POST">
-    <div class="form-body">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
+    <div class="container-fluid">
+        <h1>Login</h1>
+        <form method="POST" action="https://afsaccess4.njit.edu/~jl2237/frontback.php">
+            <div class="mb-3">
+                <label class="form-label" for="email">Username/Email:   </label>
+                <input class="form-control" type="text" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="pw">Password:    </label>
+                <input class="form-control" type="password" id="pw" name="password" required minlength="8" />
+            </div><br>
+            <input type="submit" class="mt-3 btn btn-dark" value="Login" />
+
+        </form>
     </div>
-    <br><br>
-    <div class="form-body">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <br><br>
-    <button type="submit" name="login" value="login">Log In</button>
-  </form>
-  <br>
-  E-mail: <?php echo $_POST["email"]; ?><br>
-  Password: <?php echo $_POST["password"]; ?>
 
 </body>
 
 </html>
+
