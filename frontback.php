@@ -5,7 +5,7 @@
         
         // Sanitizing Credentials
 
-        $pattern = "/[^\w\d]+/i";
+        $pattern = "/[^\w\d\@\.]+/i";
         if(preg_match($pattern, $email)){
             echo '<script type="text/javascript">alert("Invalid Username, Try Again");</script>' ;
             echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/login.php" </script>';
