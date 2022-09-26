@@ -3,7 +3,19 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         
-        echo $email." ".$password;
+        // Sanitizing Credentials
+
+        $pattern = "/[^\w\d]+/i";
+        if(preg_match($pattern, $email)){
+            echo '<script type="text/javascript">alert("Invalid Username, Try Again");</script>' ;
+            echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/login.php" </script>';
+            exit();
+        }else if(preg_match($pattern, $password)){
+            echo '<script type="text/javascript">alert("Invalid Password, Try Again");</script>' ;
+            echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/login.php" </script>';
+            exit();
+        }
+
         $url = 'https://afsaccess4.njit.edu/~cec44/middle.php';
         
         // Create a new cURL resource
@@ -28,18 +40,16 @@
         // Execute the POST request
         $result = curl_exec($ch);
         $response = json_decode($result, true);
+
         // Close cURL resource
         curl_close($ch);
         
-        //echo '<pre>';
 
         // var_export outputs data as php code, testing functionality
 
         //var_dump($result);
         var_export($response);
-        echo gettype($response);
-        echo '<br>here: '.$response.' there<br>';
-        echo $response['success'];
+        
         
 
         $var = $response['success'];
@@ -52,24 +62,21 @@
 
         
         if($var == 1 && $role == 'teacher'){
-            // Test page 1
-            echo '<script>window.open("https://afsaccess4.njit.edu/~jl2237/teacher.php")</script>';
-            //echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/teacher.php" </script>';
+            // Teacher page
+            //echo '<script>window.open("https://afsaccess4.njit.edu/~jl2237/teacher.php")</script>';
+            echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/teacher.php" </script>';
         }
         else if ($var == 1 && $role == 'student'){
-            //Test page 2
+            //Student Page
             //echo '<script>window.open("https://afsaccess4.njit.edu/~jl2237/student.php")</script>';
             echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/student.php" </script>';
         }else{
             // Invalid Credentials 
-            echo '<script type="text/javascript">alert("invalid credentials");</script>' ;
+            echo '<script type="text/javascript">alert("Invalid Credentials, Try Again");</script>' ;
             echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/login.php" </script>';
         }
-        // Need the if statement here to redirect
-        // echo '<script>window.location = "https://afsaccess4.njit.edu/~jl2237/trial.php" </script>';
-
-        //echo '</pre>';
+      
     }
-    echo "here";
+ 
    
 ?>
