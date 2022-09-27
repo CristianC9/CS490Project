@@ -14,7 +14,11 @@
         
         echo $result;
     } else {
-        echo "Invalid Login";
+        $data = array(
+        'success' => 0,
+        'message' => "An unexpected error occurred."
+        );
+      echo json_encode($data);
     }
         
 ?>
