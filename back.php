@@ -17,7 +17,7 @@
       	}
        
         $data = [];
-        $stmt = $db->prepare("SELECT * from Users where username = :username");
+        $stmt = $db->prepare("SELECT * from users where username = :username");
         try {
             $r = $stmt->execute([":username" => $username]);
             if ($r) {
