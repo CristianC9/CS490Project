@@ -15,12 +15,14 @@
         $test_case_scores= $_POST['test_case_scores'];
         $student_id= $_POST['student_id'];
         $exam_id = $_POST['exam_id'];
+        $constraint_scores = $_POST['constraint_scores'];
         // Setup request to send json via POST
         $data = array(
             'test_case_scores' => $test_case_scores,
             'comments' => $comments,
             'function_scores' => $function_scores,
             'exam_id' => $exam_id,
+            'constraint_scores' => $constraint_scores,
             'student_id'=> $student_id
         );
         $json_data = json_encode($data);
@@ -41,7 +43,7 @@
 
         // Close cURL resource
         curl_close($ch);
-        var_dump($result);
+        //var_dump($result);
         
 
         echo '<script>window.location=("https://afsaccess4.njit.edu/~jl2237/teacher/grade.php") </script>';
