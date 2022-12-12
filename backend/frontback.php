@@ -52,7 +52,7 @@
         // var_export outputs data as php code, testing functionality
 
         //var_dump($result);
-        var_export($response);
+        //var_export($response);
         
         
         $badLogin = 'Bad Credential, try again';
