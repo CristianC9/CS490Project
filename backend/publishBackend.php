@@ -42,7 +42,7 @@
 
             // Close cURL resource
             curl_close($ch);
-            var_dump($result);
+ //           var_dump($result);
             
 
             // var_export outputs data as php code, testing functionality
