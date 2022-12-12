@@ -15,6 +15,7 @@
 <style>
     body{
         background: #EEEEEE;
+        padding: 20px;
     }
     h1{
         padding-top:15px;
@@ -45,7 +46,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
         <h1>Welcome to the Teacher Page</h1>
-        <a class="btn btn-primary" style="float:right; padding-right:10px;" href="https://afsaccess4.njit.edu/~jl2237/login.php">Back To Login</a>
+        <a class="btn btn-primary" style="float:right; padding-right:1em;" href="https://afsaccess4.njit.edu/~jl2237/login.php">Back To Login</a>
 
         <br><br>
 
