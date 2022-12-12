@@ -34,7 +34,7 @@
 
     // Close cURL resource
     curl_close($ch);
-    var_export($result);
+    //var_export($result);
 
 
     echo '<script>window.location=("https://afsaccess4.njit.edu/~jl2237/teacher/grade.php") </script>';
