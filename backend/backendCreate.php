@@ -5,15 +5,21 @@ require("../functions.php");
 if (checkSet()) {
     session_start();
     $question = $_POST["question"];
-    $case1 = $_POST["case1"];
-    $output1 = $_POST["output1"];
+    $case = $_POST["case"];
+    $output = $_POST["output"];
     $functionname = $_POST["functionname"];
     $topic = $_POST['topic'];
     $difficulty = $_POST['difficulty'];
-    $case2 = $_POST["case2"];
-    $output2 = $_POST["output2"];
     
-    if(!($case1=="") && !($question=="")){
+    if (isset($_POST['constraint'])){
+       $constraint = $_POST['constraint'];
+    }
+    else{
+      $constraint = NULL;
+    }
+    
+    
+    if(!($question=="")){
     $url = 'https://afsaccess4.njit.edu/~cec44/middle_create_question.php';
         
         // Create a new cURL resource
@@ -22,13 +28,12 @@ if (checkSet()) {
         // Setup request to send json via POST
         $data = array(
             'question' => $question,
-            'case1' => $case1,
-            'output1' => $output1,
+            'case' => $case,
+            'output' => $output,
             'functionname' => $functionname,
             'topic' => $topic,
             'difficulty' => $difficulty,
-            'case2' => $case2,
-            'output2' => $output2
+            'constraint' => $constraint
         );
         $json_data = json_encode($data);
 
@@ -48,8 +53,9 @@ if (checkSet()) {
 
         // Close cURL resource
         curl_close($ch);
-        var_dump($result);
-        
+        //var_dump($response);
+        echo '<br><br>';
+        //var_dump($data);
 
         // var_export outputs data as php code, testing functionality
 
@@ -63,7 +69,7 @@ if (checkSet()) {
     $status = "Failed";
     $_SESSION['submitted'] = $status;
     echo $_SESSION['submitted'];
-    echo '<script>window.location="https://afsaccess4.njit.edu/~jl2237/teacher/createquestion.php" </script>';
+    echo '<script>window.location=("https://afsaccess4.njit.edu/~jl2237/teacher/createquestion.php") </script>';
     
 }
 }
