@@ -46,6 +46,9 @@
         padding: 20px;
         background: #EEEEEE;
         }
+        .btn:hover,.btn:active,.btn:focus {
+            background: lightgreen;
+        }
         </style>
     <head>
         <title>
@@ -54,7 +57,8 @@
     </head>
     <body>
         <h1>Welcome to the Student Page</h1>
-        
+        <a class="btn btn-primary" style="float:right; padding-right:1em;" href="https://afsaccess4.njit.edu/~jl2237/login.php">Back To Login</a>
+<br><br>
         <div class="row">
         <?php foreach($response['exams'] as $exam){
             if($exam['published']==1){
@@ -63,7 +67,7 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $exam['exam_title']?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $exam['total_points']?> Points</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Max Points: <?php echo $exam['total_points']?></h6>
                     <p class="card-text"><?php echo $exam['exam_description']?></p>
                     <?php if($exam['submitted'] == 0 && $exam['released'] == 0){ ?>
                     <form class="form" action="https://afsaccess4.njit.edu/~jl2237/backend/takeExamBackend.php" method="post">
@@ -73,13 +77,13 @@
                     <?php }
                     elseif($exam['submitted'] == 1 && $exam['released'] ==1){ ?>
                     <form class="form" action="https://afsaccess4.njit.edu/~jl2237/backend/student_view_grade.php" method="post">
-                        <input class="btn btn-primary" type="submit" value="Show Grade">
+                        <input class="btn btn-primary" type="submit" value="Show My Grade">
                         <input name="exam_id" type="hidden" value="<?php echo $exam['exam_id']?>">
                         <input name="student_id" type="hidden" value="<?php echo $exam['student_id']?>">
                     </form>
                     <?php }
                     else{
-                        echo "test taken";
+                        echo "Test Submitted, Waiting for Grade!";
                         } 
                     ?>
                     
