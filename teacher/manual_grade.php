@@ -14,6 +14,7 @@
     $exam_id = $data['exam_id'];
     $user_id = $data['student_id'];
 
+
     
 }
         
@@ -70,12 +71,14 @@
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $question['score']?>
                     <?php echo "/ ".$question['points']?> Points</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Student Answer</h6>
+                    <textarea class="textarea form-control" style="height: 10em;"disabled><?php echo $question['student_answer']?></textarea>
                     <table class="table table-striped table-bordered">
                         <thead class="thead text-center" style="font-weight:bold;">
                             <tr>
                                 <td>Expected</td>
                                 <td>Run</td>
                                 <td>Check</td>
+                                <td>Expected Points</td>
                                 <td>Points</td>
                             </tr>
                         </thead>
@@ -85,7 +88,7 @@
                                     <?php echo $question['function_name']?>
                                 </td>
                                 <td>
-                                    <?php echo substr($question['student_answer'], 4, strlen($question['function_name']))?>
+                                    <?php echo substr(explode(":", $question['student_answer'], 2)[0],4);?>
                                 </td>
                                 <td> <?php if($question['correct_name'] != 0){
                                         echo "True";
@@ -93,17 +96,33 @@
                                         echo "False";
                                     ?>
                                 </td>
+                                <td class="col-2">
+                                    <?php 
+                                        $points = $question['points'];
+                                        $divisors = 1;
+                                        
+                                        foreach($data['test_cases'] as $tc){
+                                            if ($tc['eqid']==$question['eqid'] ){
+                                                $divisors += 1;
+                                            }
+                                        }
+
+                                        if ($question['qconstraint'] != null){
+                                            $divisors += 1; 
+                                            echo round(($points / $divisors), 2);
+                                        }else{
+                                            echo round(($points / $divisors), 2);
+                                        }
+
+                                    ?>
+                                </td>
                                 
-                                <td class="col-1"id='points'>
+                                <td class="col-2" id='points'>
                                     <textarea class="textarea form-control" name="function_scores[]"><?php echo $question['correct_name'];?></textarea>
                                 </td>
                             </tr>
-                            <tr>
-
-                            </tr>
-                            <tr>
-
-                            </tr>   
+                            
+                            
                         
                         
                         
@@ -127,14 +146,35 @@
                                         echo "Error in Student Code";
                                         }?>  
                                 </td>
-                                <td><?php if($test_case['passed'] == 1){
+                                <td class="col-2"><?php if($test_case['passed'] == 1){
                                         echo "True";
                                         }else
                                         echo "False";
                                     ?>
+                                    
                                 </td>
+                                <td class="col-2">
+                                    <?php 
+                                        $points = $question['points'];
+                                        $divisors = 1;
+                                        
+                                        foreach($data['test_cases'] as $tc){
+                                            if ($tc['eqid']==$question['eqid'] ){
+                                                $divisors += 1;
+                                            }
+                                        }
+
+                                        if ($question['qconstraint'] != null){
+                                            $divisors += 1; 
+                                            echo round(($points / $divisors), 2);
+                                        }else{
+                                            echo round(($points / $divisors), 2);
+                                        }
+                                    ?>
+                                    </td>
                                 
-                                <td class="col-1">
+                                <td class="col-2">
+
                                     <textarea class="textarea form-control" name="test_case_scores[]"><?php echo $test_case['score']?></textarea>
                                 </td> 
                             </tr>  
@@ -143,7 +183,50 @@
                           }
                         }
                       ?>
-                      
+                      <tr>
+                        <td>
+                        Constraint: <?php echo $question['qconstraint']?>
+                    </td>
+                    <td>
+                       
+                    </td>
+                    <td>
+                    <?php if($question['constraint_score'] > 3){
+                            echo "True";
+                        }else if(!$question['qconstraint']){
+                            echo "";
+                        }
+                        else{
+                            echo "False";
+                        }?>
+                    </td>
+                    <td class="col-2">
+                        <?php 
+                            $points = $question['points'];
+                            $divisors = 1;
+                            if ($question['qconstraint'] != null){
+                                $divisors += 1; 
+                            }
+                            foreach($data['test_cases'] as $tc){
+                                if ($tc['eqid']==$question['eqid'] ){
+                                    $divisors += 1;
+                                }
+                            }
+
+                            if ($question['qconstraint'] != null){
+                                 echo round(($points / $divisors), 2);
+                            }else{
+                                echo 0;
+                            }
+                           
+
+                        ?>
+                       
+                    </td>
+                    <td class="col-2">
+                        <textarea class="textarea form-control" name="constraint_scores[]"><?php echo $question['constraint_score']?></textarea>
+                    </td>
+                    </tr>
                     </tbody>
                     </table>
                     <br> 
