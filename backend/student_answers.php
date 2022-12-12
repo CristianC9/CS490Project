@@ -49,13 +49,13 @@
 
     // Close cURL resource
     curl_close($ch);
-    var_dump($result);
+//    var_dump($result);
 
     //***********
 
     $_SESSION['exam'] = $response;
     //var_dump($_SESSION['exam']);
-    echo '<script>window.open("https://afsaccess4.njit.edu/~jl2237/student/student.php") </script>';
+    echo '<script>window.location=("https://afsaccess4.njit.edu/~jl2237/student/student.php") </script>';
     }
 
     
