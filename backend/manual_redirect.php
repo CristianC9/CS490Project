@@ -38,7 +38,7 @@ require("../functions.php");
         // Close cURL resource
         curl_close($ch);
         
-        var_dump($response);
+        //var_dump($response);
         $_SESSION['exam'] = $response;
 
         echo '<script>window.location=("https://afsaccess4.njit.edu/~jl2237/teacher/manual_grade.php") </script>';
